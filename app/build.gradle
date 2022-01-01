@@ -85,10 +85,6 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
 
-    implementation "androidx.room:room-ktx:$roomVersion"
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-
     implementation project(':apimodule')
     implementation project(':baseui')
     implementation project(':datamodel')
