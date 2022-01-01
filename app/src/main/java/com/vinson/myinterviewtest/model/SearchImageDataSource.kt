@@ -13,14 +13,16 @@ class SearchImageDataSource {
 
     fun getSearchImageSource(queryKey: String) = object : PagingSource<Int, ImageResult>() {
 
+        private val perPage = 20
+
         override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ImageResult> {
             return try {
                 val nextPage = params.key ?: 1
-                val response = api.queryHits(nextPage, queryKey)
+                val response = api.queryHits(page = nextPage, q = queryKey, perPage = perPage)
 
                 when (val result = response.getResult()) {
                     is Result.Success -> {
-                        val isOverFlow = 20 * nextPage > response.body()?.totalHit ?: 0
+                        val isOverFlow = perPage * nextPage > response.body()?.totalHit ?: 0
                         LoadResult.Page(
                                 data = result.data,
                                 prevKey = null,
