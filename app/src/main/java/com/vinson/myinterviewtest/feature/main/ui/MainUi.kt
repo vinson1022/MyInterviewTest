@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -108,6 +107,10 @@ fun ImageResultsUi(
     val switchRowState = rememberSwitchRowState(connection = switchRowConnection)
     val scrollState = rememberLazyListState()
 
+    if (uiConfig.canDownload) {
+        RequiresWriteExternalStoragePermission()
+    }
+
     SwitchRow(
         state = switchRowState,
         modifier = Modifier
@@ -194,7 +197,7 @@ enum class LayoutStyle {
     Linear, Grid;
 
     companion object {
-        fun fromValue(value: String) = when(value) {
+        fun fromValue(value: String) = when (value) {
             "grid" -> Grid
             else -> Linear
         }

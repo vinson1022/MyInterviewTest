@@ -30,7 +30,6 @@ import com.vinson.baseui.ui.theme.Caption
 import com.vinson.baseui.ui.theme.Shapes
 import com.vinson.baseui.ui.util.rememberPicturePainter
 import com.vinson.datamodel.models.ImageResult
-import java.io.File
 import java.lang.Integer.min
 
 @Composable
@@ -201,17 +200,17 @@ fun ImageResultBox(
 }
 
 fun Activity.startDownloadImage(url: String) {
+    val uri = Uri.parse(url)
     val manager = getSystemService(Context.DOWNLOAD_SERVICE) as? DownloadManager
-    val request = DownloadManager.Request(Uri.parse(url))
-
-    request.setAllowedNetworkTypes(
-        DownloadManager.Request.NETWORK_MOBILE
-            or DownloadManager.Request.NETWORK_WIFI
+    val request = DownloadManager.Request(uri)
+    request.addRequestHeader("Accept", "application/jpg")
+    request.setDestinationInExternalPublicDir(
+        Environment.DIRECTORY_DOWNLOADS,
+        uri.lastPathSegment ?: System.currentTimeMillis().toString()
     )
     request.setNotificationVisibility(
         DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
     )
-    request.setVisibleInDownloadsUi(true)
     request.setTitle("Download from pixabay")
 
     manager?.enqueue(request)

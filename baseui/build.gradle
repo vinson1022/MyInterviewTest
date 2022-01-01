@@ -73,6 +73,7 @@ dependencies {
     api "androidx.compose.foundation:foundation:$compose"
     api "com.google.accompanist:accompanist-flowlayout:$accompanist"
     api "com.google.accompanist:accompanist-systemuicontroller:$accompanist"
+    api "com.google.accompanist:accompanist-permissions:$accompanist"
 
     api "io.coil-kt:coil:$coil"
     api "io.coil-kt:coil-compose:$coil"
