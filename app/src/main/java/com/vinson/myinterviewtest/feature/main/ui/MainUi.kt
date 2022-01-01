@@ -42,7 +42,7 @@ fun MainContent(
         viewModel.getUiConfig()
     }
 
-    LaunchedEffect(key1 = confirmQueryKey) {
+    LaunchedEffect(key1 = confirmQueryKey.value) {
         if (confirmQueryKey.value.isNotEmpty()) {
             viewModel.recordQuery(confirmQueryKey.value)
             resultFlow = viewModel.startQuery(confirmQueryKey.value)
