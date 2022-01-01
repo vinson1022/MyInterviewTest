@@ -35,54 +35,6 @@ class MainViewModelTest : BaseTest() {
         super.end()
     }
 
-//    @Test
-//    fun testFetch_whenGetLiveRatesSuccess_thenUiModelsValue() = runBlocking {
-//        @Tag(GIVEN)
-//        coEvery {
-//            viewModel.repository.queryImageResults()
-//        } returns Result.Success(getFakeLiveRates())
-//
-//        @Tag(WHEN)
-//        viewModel.getLiveRates()
-//
-//        @Tag(THEN)
-//        assertEquals("a", viewModel.currencies.value.first().shortName)
-//        assertEquals("f", viewModel.currencies.value.last().shortName)
-//        assertEquals(true, viewModel.quoteUiModels.value.first() == QuoteUiModel("a", "0"))
-//        assertEquals(true, viewModel.quoteUiModels.value.last() == QuoteUiModel("f", "0"))
-//    }
-//
-//    @Test
-//    fun testFetch_whenSetMount_thenUiModelsValue() = runBlocking {
-//        @Tag(GIVEN)
-//        coEvery {
-//            viewModel.repository.getLiveRates()
-//        } returns Result.Success(getFakeLiveRates())
-//
-//        @Tag(WHEN)
-//        viewModel.startQuery("180")
-//
-//        @Tag(THEN)
-//        assertEquals(true, viewModel.quoteUiModels.value.first() == QuoteUiModel("a", "180"))
-//        assertEquals(true, viewModel.quoteUiModels.value.last() == QuoteUiModel("f", "900"))
-//    }
-//
-//    @Test
-//    fun testFetch_whenSetMount_andSetSelectedCurrency_thenUiModelsValue() = runBlocking {
-//        @Tag(GIVEN)
-//        coEvery {
-//            viewModel.repository.getLiveRates()
-//        } returns Result.Success(getFakeLiveRates())
-//
-//        @Tag(WHEN)
-//        viewModel.startQuery("180")
-//        viewModel.setLayoutStyle(Currency("c"))
-//
-//        @Tag(THEN)
-//        assertEquals(true, viewModel.quoteUiModels.value.first() == QuoteUiModel("a", "60"))
-//        assertEquals(true, viewModel.quoteUiModels.value.last() == QuoteUiModel("f", "360"))
-//    }
-
     @Test
     fun testHistoryQueries_giveInitString_thenGetQueries() {
         @Tag(GIVEN)
