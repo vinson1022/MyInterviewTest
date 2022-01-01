@@ -1,0 +1,95 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'shot'
+}
+
+android {
+    compileSdk 31
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.vinson.myinterviewtest"
+        minSdk 27
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "com.karumi.shot.ShotTestRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose
+        kotlinCompilerVersion '1.6.10'
+    }
+    packagingOptions {
+        resources {
+            excludes += 'META-INF/*'
+        }
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "androidx.core:core-ktx:$coreKtx"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    testImplementation "junit:junit:$junit"
+
+    // For mockk
+    testImplementation "io.mockk:mockk:$mockk"
+    // For Architecture Components unit test
+    testImplementation "androidx.arch.core:core-testing:$coreTest"
+    testImplementation "org.robolectric:robolectric:$robolectric"
+
+    androidTestImplementation "androidx.test:runner:$runner"
+    androidTestImplementation "androidx.test:rules:$rules"
+    testImplementation "androidx.test.ext:junit-ktx:$junitKtx"
+    testImplementation "androidx.test:core-ktx:$coreKtxTest"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest"
+    debugImplementation "androidx.compose.ui:ui-test-junit4:$compose"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose"
+    // Needed for createComposeRule, but not createAndroidComposeRule:
+    androidTestImplementation "androidx.compose.ui:ui-test-manifest:$compose"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleKtx"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleKtx"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    implementation "com.google.android.material:material:$material"
+
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    implementation project(':apimodule')
+    implementation project(':baseui')
+    implementation project(':datamodel')
+}
