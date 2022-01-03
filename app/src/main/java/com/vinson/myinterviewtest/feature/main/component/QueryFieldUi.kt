@@ -33,9 +33,7 @@ fun QueryFieldWithHint(
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged {
-                    if (it.hasFocus) {
-                        expanded = true
-                    }
+                    expanded = it.hasFocus
                 },
             onValueChange = {
                 expanded = true

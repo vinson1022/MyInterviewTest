@@ -2,6 +2,8 @@ package com.vinson.myinterviewtest.feature.main.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,6 +12,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -50,10 +53,18 @@ fun MainContent(
         }
     }
 
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Text10)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null
+            ) {
+                focusManager.clearFocus()
+            }
     ) {
         QueryFieldWithHint(
             modifier = Modifier
@@ -106,6 +117,13 @@ fun ImageResultsUi(
     }
     val switchRowState = rememberSwitchRowState(connection = switchRowConnection)
     val scrollState = rememberLazyListState()
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(key1 = scrollState.isScrollInProgress) {
+        if (scrollState.firstVisibleItemScrollOffset != 0) {
+            focusManager.clearFocus()
+        }
+    }
 
     if (uiConfig.canDownload) {
         RequiresWriteExternalStoragePermission()
